@@ -1,0 +1,11 @@
+import { request } from "express";
+import { Promise } from "mongoose";
+
+const asyncHandler = (requestHandler) => {
+    (req, res, next) => {
+        Promise.resolve(requestHandler(req, res, next)).
+        catch((err)=> next(err));
+    }
+}
+
+export {asyncHandler};
